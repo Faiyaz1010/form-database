@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule for Project Task</title>
+  
+    <style> 
+        body {
+         
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .tables-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px; /* Space between tables */
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"] {
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #c24343b5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #6595c9;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .deleteRow {
+            background-color: #a3e532;
+            color: rgb(240, 43, 8);
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        
+        }
+
+        .colorPickerContainer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            color: rgb(115, 107, 228);
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule Task</h1>
+    
+    <div class="tables-container">
+        <div class="container" style="width: 400px;">
+            <form id="scheduleForm">
+                <label for="projectName">Project Name:</label>
+                <textarea type="text" id="projectName" name="projectName" placeholder="Project Name" required></textarea>
+
+                <label for="place">Place:</label>
+                <textarea type="text" id="place" name="place" placeholder="Place" required></textarea>
+
+                <button type="submit">Save Project</button>
+            </form>
+            <table id="projectsTable">
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    <!-- Saved projects will appear here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container" style="width: 400px;">
+            <form id="approvalForm">
+                <textarea type="text" id="approval" placeholder="Approval" required></textarea>
+                <textarea type="text" id="confirmation" placeholder="Confirmation" required></textarea>
+                <textarea type="text" id="createdBy" placeholder="Created By" required></textarea>
+                <button type="submit">Add</button>
+            </form>
+            <table id="approvalTable">
+                <thead>
+                    <!-- <tr>
+                        <th>Approval</th>
+                        <th>Confirmation</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
+                    </tr> -->
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+        <button style="margin-top: 20px;" id="addRow">Add Row</button>
+        <button style="margin-top: 20px;" id="saveData">Save Data</button>
+
+        <div class="colorPickerContainer">
+            <label for="cellColorPicker">Select Color:</label>
+            <input type="color" id="cellColorPicker" value="#ffffff" />
+        </div>
+
+        <table id="taskTable">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Project Leader</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration (Days)</th>
+                    <th colspan="4">Oct-24</th>
+                    <th colspan="4">Nov-24</th>
+                    <th colspan="4">Dec-24</th>
+                    <th colspan="4">Jan-25</th>
+                    <th colspan="4">Feb-25</th>
+                    <th colspan="4">Mar-25</th>
+                    <th colspan="4">Arl-25</th>
+                    <th colspan="4">May-25</th>
+                    <th colspan="4">Jun-25</th>
+                   
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    <th>Week 1</th>
+                    <th>Week 2</th>
+                    <th>Week 3</th>
+                    <th>Week 4</th>
+                    
+                
+                    <th>Delete row</th>  
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Task rows will appear here -->
+            </tbody>
+        </table>
+    </div>
+
+    <button style="margin-top: 20px;" id="addRow">Add column</button>
+        <button style="margin-top: 20px;" id="saveData">Delete column</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let selectedCell; // Store the currently selected cell
+
+            // Load data from localStorage
+            if (localStorage.getItem('taskTableData')) {
+                $('#taskTable tbody').html(localStorage.getItem('taskTableData'));
+            }
+
+            // Add row functionality
+            $('#addRow').click(function() {
+                let newRow = `<tr>
+                                <td><input type="text" placeholder="Task Name"></td>
+                                <td><input type="text" placeholder="Project Leader"></td>
+                                <td><input type="date" class="startDate"></td>
+                                <td><input type="date" class="endDate"></td>
+                                <td><input type="text" placeholder="Duration"></td>`;
+                
+                // Add month/week columns
+                for (let month = 0; month < 9; month++) { // 17 months (Oct24-Mar26)
+                    for (let week = 1; week <= 4; week++) {
+                        newRow += `<td>
+                                        <textarea style="height: 30px; width:60px;" placeholder=""></textarea>
+                                    </td>`;
+                    }
+                }
+                
+                newRow += `<td><button class="deleteRow">Delete</button></td></tr>`;
+                $('#taskTable tbody').append(newRow);
+            });
+
+            // Save data to localStorage
+            $('#saveData').click(function() {
+                const tableData = $('#taskTable tbody').html();
+                localStorage.setItem('taskTableData', tableData);
+                alert("Data saved!");
+            });
+
+            // Delete row functionality
+            $(document).on('click', '.deleteRow', function() {
+                $(this).closest('tr').remove();
+            });
+
+            // Cell selection for color application
+            $(document).on('click', '#taskTable tbody td', function() {
+                selectedCell = $(this);
+            });
+
+            // Change cell color when color is selected
+            $('#cellColorPicker').on('input', function() {
+                if (selectedCell) {
+                    const color = $(this).val();
+                    selectedCell.css('background', color);
+                }
+            });
+
+            // Handle project form submission
+            $('#scheduleForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var projectName = $('#projectName').val();
+                var place = $('#place').val();
+                $('#projectsTable tbody').append(
+                    `<tr>
+                        <td>${projectName}</td>
+                        <td>${place}</td>
+                        <td><button class="deleteBtn">Delete</button></td>
+                    </tr>`
+                );
+                $('#projectName').val('');
+                $('#place').val('');
+            });
+
+            // Delegate delete button click event
+            $('#projectsTable').on('click', '.deleteBtn', function() {
+                $(this).closest('tr').remove(); // Remove the row
+            });
+        });
+        
+         $(function() {
+        $('#approvalForm').submit(function(e) {
+            e.preventDefault();
+            const row = `<tr>
+                <td>${$('#approval').val()}</td>
+                <td>${$('#confirmation').val()}</td>
+                <td>${$('#createdBy').val()}</td>
+                <td><button class="delete">Delete</button></td>
+            </tr>`;
+            $('#approvalTable tbody').append(row);
+            $('#approvalForm input').val('');
+        });
+
+        $(document).on('click', '.delete', function() {
+            $(this).closest('tr').remove();
+        });
+    });
+    </script>
+</body>
+</html>
