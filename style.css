@@ -70,6 +70,166 @@ button:hover {
         padding: 8px;
     }
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .card h1 {
+            margin: 10px 0;
+            font-size: 2em;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .flow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1em;
+        }
+        .flow-diagram div {
+            margin: 5px;
+        }
+        .pie-chart, .bar-chart {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Metrics Cards -->
+        <div class="card">
+            <h1>12.8 kWh</h1>
+            <p>Yield Energy Daily</p>
+        </div>
+        <div class="card">
+            <h1>7.0 kWh</h1>
+            <p>Exported Energy Daily</p>
+        </div>
+        <div class="card">
+            <h1>6.1 kWh</h1>
+            <p>Selfuse Energy Daily</p>
+        </div>
+        <div class="card">
+            <h1>12.8 kWh</h1>
+            <p>Grid Consumption Energy</p>
+        </div>
+
+        <!-- Flow Diagram -->
+        <div class="card flow-diagram">
+            <div>Solar: 2307 W</div>
+            <div>Grid: -221 W</div>
+            <div>Battery: 0 W</div>
+            <div>Home: 2086 W</div>
+        </div>
+
+        <!-- Power Graph -->
+        <div class="card">
+            <canvas id="powerChart"></canvas>
+        </div>
+
+        <!-- Proportion Chart -->
+        <div class="card">
+            <canvas id="proportionChart" class="pie-chart"></canvas>
+        </div>
+
+        <!-- Yield Daily Chart -->
+        <div class="card">
+            <canvas id="yieldDailyChart" class="bar-chart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Power Chart
+            const powerCtx = document.getElementById('powerChart').getContext('2d');
+            new Chart(powerCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1 PM', '5 PM', '9 PM', '1 AM', '5 AM', '9 AM'],
+                    datasets: [
+                        { label: 'Inverter Power', data: [2084, 2500, 1800, 1900, 2200, 2084], borderColor: 'orange', fill: false },
+                        { label: 'Feed-in Power', data: [-974, -900, -950, -850, -800, -974], borderColor: 'blue', fill: false },
+                        { label: 'Load Power', data: [3058, 3100, 3000, 2950, 2900, 3058], borderColor: 'red', fill: false }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+
+            // Proportion Chart
+            const proportionCtx = document.getElementById('proportionChart').getContext('2d');
+            new Chart(proportionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Exported Energy', 'Selfuse Energy'],
+                    datasets: [{
+                        data: [46.5, 53.5],
+                        backgroundColor: ['#36A2EB', '#FF6384']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Yield Daily Chart
+            const yieldDailyCtx = document.getElementById('yieldDailyChart').getContext('2d');
+            new Chart(yieldDailyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 Aug', '8 Aug', '9 Aug'],
+                    datasets: [
+                        { label: 'Yield Energy', data: [12.6, 15, 20, 25, 18, 12.6, 12.6], backgroundColor: 'orange' },
+                        { label: 'Exported Energy', data: [6.9, 8, 10, 12, 9, 6.9, 6.9], backgroundColor: 'blue' },
+                        { label: 'Selfuse Energy', data: [6, 7, 10, 13, 9, 6, 6], backgroundColor: 'green' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
 
 
